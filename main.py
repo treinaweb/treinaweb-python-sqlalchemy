@@ -3,8 +3,11 @@ from entidades import cliente
 from fabricas import fabrica_conexao
 
 fabrica = fabrica_conexao.FabricaConexao()
+#
+# print(fabrica.conectar())
 
-print(fabrica.conectar())
+sessao = fabrica.criar_sessao()
+print(sessao)
 
 # cliente = cliente.Cliente("João", 29)
 # repositorio_cliente = cliente_repositorio.ClienteRepositorio()

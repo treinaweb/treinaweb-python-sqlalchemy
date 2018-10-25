@@ -6,7 +6,7 @@ class FabricaConexao():
 
     def conectar(self):
         config = configparser.ConfigParser()
-        config.read('config.ini')
+        config.read('../config.ini')
 
         user = config['DATABASE']['user']
         passwd = config['DATABASE']['passwd']

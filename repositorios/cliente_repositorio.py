@@ -1,4 +1,6 @@
+from dominios.db import Cliente
 from fabricas import fabrica_conexao
+from queries import cliente_query
 
 
 class ClienteRepositorio():
@@ -14,14 +16,10 @@ class ClienteRepositorio():
             conexao.close()
 
 
-    def inserir_cliente(self, cliente):
-        fabrica = fabrica_conexao.FabricaConexao()
-        conexao = fabrica.conectar()
-        try:
-            cursor = conexao.cursor()
-            cursor.execute("INSERT INTO cliente (nome, idade) VALUES (%s, %s)", (cliente.nome, cliente.idade))
-        finally:
-            conexao.close()
+    def inserir_cliente(self, cliente, sessao):
+        query_cliente = cliente_query.ClienteQuery()
+        novo_cliente = Cliente(nome=cliente.nome, idade=cliente.idade)
+        query_cliente.inserir_cliente(novo_cliente, sessao)
 
     def editar_cliente(self, id_cliente, cliente):
         fabrica = fabrica_conexao.FabricaConexao()

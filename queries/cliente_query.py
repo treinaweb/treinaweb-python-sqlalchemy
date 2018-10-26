@@ -7,3 +7,7 @@ class ClienteQuery():
 
     def editar_cliente(self, id_cliente, cliente, sessao):
         sessao.query(Cliente).filter(Cliente.id==id_cliente).update({'nome': cliente.nome, 'idade': cliente.idade})
+
+    def remover_cliente(self, id_cliente, sessao):
+        cliente = sessao.query(Cliente).filter(Cliente.id==id_cliente).first()
+        sessao.delete(cliente)

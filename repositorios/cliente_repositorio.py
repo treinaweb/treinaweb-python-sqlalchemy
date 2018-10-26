@@ -21,15 +21,10 @@ class ClienteRepositorio():
         novo_cliente = Cliente(nome=cliente.nome, idade=cliente.idade)
         query_cliente.inserir_cliente(novo_cliente, sessao)
 
-    def editar_cliente(self, id_cliente, cliente):
-        fabrica = fabrica_conexao.FabricaConexao()
-        conexao = fabrica.conectar()
-        try:
-            cursor = conexao.cursor()
-            cursor.execute("UPDATE cliente SET nome=%(nome)s, idade=%(idade)s WHERE idcliente=%(id_cliente)s",
-                       ({'nome': cliente.nome, 'idade': cliente.idade, 'id_cliente': id_cliente}))
-        finally:
-            conexao.close()
+    def editar_cliente(self, id_cliente, cliente, sessao):
+        query_cliente = cliente_query.ClienteQuery()
+        query_cliente.editar_cliente(id_cliente, cliente, sessao)
+
 
     def remover_cliente(self, id_cliente):
         fabrica = fabrica_conexao.FabricaConexao()

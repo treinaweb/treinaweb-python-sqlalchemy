@@ -24,3 +24,8 @@ class ClienteQuery():
         cliente = sessao.query(Cliente).filter(Cliente.id == id_cliente).first()
 
         return cliente
+
+    def listar_cliente_nome(self, nome_cliente, sessao):
+        clientes = sessao.query(Cliente).filter(Cliente.nome == nome_cliente).all()
+
+        return clientes

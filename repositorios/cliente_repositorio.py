@@ -17,6 +17,12 @@ class ClienteRepositorio():
 
         return cliente
 
+    def listar_cliente_nome(self, nome_cliente, sessao):
+        query_cliente = cliente_query.ClienteQuery()
+        clientes = query_cliente.listar_cliente_nome(nome_cliente, sessao)
+
+        return clientes
+
     def inserir_cliente(self, cliente, sessao):
         query_cliente = cliente_query.ClienteQuery()
         novo_cliente = Cliente(nome=cliente.nome, idade=cliente.idade)

@@ -79,7 +79,7 @@ while loop:
                 #     print(i)
                 # cliente = repositorio.listar_cliente_id(5, sessao)
                 # print(cliente)
-                clientes = repositorio.listar_cliente_nome("Maria", sessao)
+                clientes = repositorio.listar_cliente_nome_ordenado("Maria", sessao)
                 for i in clientes:
                     print(i)
             except:

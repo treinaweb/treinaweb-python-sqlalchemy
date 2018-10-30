@@ -29,3 +29,8 @@ class ClienteQuery():
         clientes = sessao.query(Cliente).filter(Cliente.nome == nome_cliente).all()
 
         return clientes
+
+    def listar_cliente_nome_ordenado(self, nome_cliente, sessao):
+        clientes = sessao.query(Cliente).filter(Cliente.nome == nome_cliente).order_by(Cliente.idade.desc()).all()
+
+        return clientes

@@ -11,3 +11,8 @@ class ClienteQuery():
     def remover_cliente(self, id_cliente, sessao):
         cliente = sessao.query(Cliente).filter(Cliente.id==id_cliente).first()
         sessao.delete(cliente)
+
+    def listar_clientes(self, sessao):
+        clientes = sessao.query(Cliente).all()
+
+        return clientes

@@ -5,15 +5,11 @@ from queries import cliente_query
 
 class ClienteRepositorio():
 
-    def listar_clientes(self):
-        fabrica = fabrica_conexao.FabricaConexao()
-        conexao = fabrica.conectar()
-        try:
-            cursor = conexao.cursor()
-            cursor.execute("SELECT * FROM cliente")
-            print(cursor.fetchall())
-        finally:
-            conexao.close()
+    def listar_clientes(self, sessao):
+        query_cliente = cliente_query.ClienteQuery()
+        clientes = query_cliente.listar_clientes(sessao)
+
+        return clientes
 
 
     def inserir_cliente(self, cliente, sessao):

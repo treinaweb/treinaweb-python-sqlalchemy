@@ -6,13 +6,21 @@ class ClienteQuery():
         sessao.add(cliente)
 
     def editar_cliente(self, id_cliente, cliente, sessao):
-        sessao.query(Cliente).filter(Cliente.id==id_cliente).update({'nome': cliente.nome, 'idade': cliente.idade})
+        client = self.listar_cliente_id(id_cliente, sessao)
+        client.nome = cliente.nome
+        client.idade = cliente.idade
+        # sessao.query(Cliente).filter(Cliente.id==id_cliente).update({'nome': cliente.nome, 'idade': cliente.idade})
 
     def remover_cliente(self, id_cliente, sessao):
-        cliente = sessao.query(Cliente).filter(Cliente.id==id_cliente).first()
+        cliente = self.listar_cliente_id(id_cliente, sessao)
         sessao.delete(cliente)
 
     def listar_clientes(self, sessao):
         clientes = sessao.query(Cliente).all()
 
         return clientes
+
+    def listar_cliente_id(self, id_cliente, sessao):
+        cliente = sessao.query(Cliente).filter(Cliente.id == id_cliente).first()
+
+        return cliente

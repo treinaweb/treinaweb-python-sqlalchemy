@@ -18,7 +18,7 @@ while loop:
         print("1. Inserir cliente")
         print("2. Editar cliente")
         print("3. Remover cliente")
-        print("4. Listar todos os clientes")
+        print("4. Listar cliente id")
         print("0. Sair")
         print(67 * "-")
         menu_cliente = int(input("Digite a opção desejada: "))
@@ -74,9 +74,11 @@ while loop:
             sessao = fabrica.criar_sessao()
             try:
                 repositorio = cliente_repositorio.ClienteRepositorio()
-                clientes = repositorio.listar_clientes(sessao)
-                for i in clientes:
-                    print(i)
+                # clientes = repositorio.listar_clientes(sessao)
+                # for i in clientes:
+                #     print(i)
+                cliente = repositorio.listar_cliente_id(5, sessao)
+                print(cliente)
             except:
                 sessao.rollback()
                 raise

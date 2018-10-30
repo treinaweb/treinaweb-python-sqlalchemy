@@ -11,6 +11,11 @@ class ClienteRepositorio():
 
         return clientes
 
+    def listar_cliente_id(self, id_cliente, sessao):
+        query_cliente = cliente_query.ClienteQuery()
+        cliente = query_cliente.listar_cliente_id(id_cliente, sessao)
+
+        return cliente
 
     def inserir_cliente(self, cliente, sessao):
         query_cliente = cliente_query.ClienteQuery()

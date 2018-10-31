@@ -1,4 +1,4 @@
-from repositorios import cliente_repositorio
+from repositorios import cliente_repositorio, pedido_repositorio
 from entidades import cliente
 from fabricas import fabrica_conexao
 
@@ -89,6 +89,34 @@ while loop:
                 sessao.close()
         else:
             continue
+
+    elif menu_principal == 3:
+        print(30 * "-", "MENU", 30 * "-")
+        print("1. Inserir pedido")
+        print("0. Sair")
+        print(67 * "-")
+        menu_pedido = int(input("Digite a opção desejada: "))
+
+        if menu_pedido == 1:
+            fabrica = fabrica_conexao.FabricaConexao()
+            sessao = fabrica.criar_sessao()
+            try:
+                id_cliente = int(input("Digite o ID do cliente a ser relacionado com o novo pedido"))
+                repositorio_pedido = pedido_repositorio.PedidoRepositorio()
+                repositorio_pedido.inserir_pedido(id_cliente, sessao)
+                sessao.commit()
+            except:
+                sessao.rollback()
+                raise
+            finally:
+                sessao.close()
+
+        elif menu_pedido == 0:
+            continue
+
+        else:
+            print("Opção inválida")
+
 
     elif menu_principal == 0:
         print("Até mais!")

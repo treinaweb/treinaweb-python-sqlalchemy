@@ -1,5 +1,5 @@
-from repositorios import cliente_repositorio, pedido_repositorio
-from entidades import cliente
+from repositorios import cliente_repositorio, pedido_repositorio, produto_repositorio
+from entidades import cliente, produto
 from fabricas import fabrica_conexao
 
 loop = True
@@ -89,6 +89,35 @@ while loop:
                 sessao.close()
         else:
             continue
+
+    elif menu_principal == 2:
+        print(30 * "-", "MENU", 30 * "-")
+        print("1. Inserir produto")
+        print("0. Sair")
+        print(67 * "-")
+        menu_produto = int(input("Digite a opção desejada: "))
+
+        if menu_produto == 1:
+            fabrica = fabrica_conexao.FabricaConexao()
+            sessao = fabrica.criar_sessao()
+            try:
+                descricao_produto = input("Digite a descrição do produto: ")
+                valor_produto = int(input("Digite o valor do produto: "))
+                novo_produto = produto.Produto(descricao_produto, valor_produto)
+                repositorio_produto = produto_repositorio.ProdutoRepositorio()
+                repositorio_produto.inserir_produto(novo_produto, sessao)
+                sessao.commit()
+            except:
+                sessao.rollback()
+                raise
+            finally:
+                sessao.close()
+
+        elif menu_produto == 0:
+            continue
+
+        else:
+            print("Opção inválida")
 
     elif menu_principal == 3:
         print(30 * "-", "MENU", 30 * "-")

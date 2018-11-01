@@ -93,6 +93,7 @@ while loop:
     elif menu_principal == 2:
         print(30 * "-", "MENU", 30 * "-")
         print("1. Inserir produto")
+        print("2. Buscar produto ID")
         print("0. Sair")
         print(67 * "-")
         menu_produto = int(input("Digite a opção desejada: "))
@@ -106,6 +107,21 @@ while loop:
                 novo_produto = produto.Produto(descricao_produto, valor_produto)
                 repositorio_produto = produto_repositorio.ProdutoRepositorio()
                 repositorio_produto.inserir_produto(novo_produto, sessao)
+                sessao.commit()
+            except:
+                sessao.rollback()
+                raise
+            finally:
+                sessao.close()
+
+        elif menu_produto == 2:
+            fabrica = fabrica_conexao.FabricaConexao()
+            sessao = fabrica.criar_sessao()
+            try:
+                id_produto = int(input("Digite o ID do produto a ser pesquisado"))
+                repositorio = produto_repositorio.ProdutoRepositorio()
+                produto = repositorio.listar_produto_id(id_produto, sessao)
+                print(produto)
                 sessao.commit()
             except:
                 sessao.rollback()

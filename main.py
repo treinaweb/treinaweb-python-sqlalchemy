@@ -146,9 +146,20 @@ while loop:
             fabrica = fabrica_conexao.FabricaConexao()
             sessao = fabrica.criar_sessao()
             try:
+                loop_pedido = True
+                lista_produtos = []
+                while loop_pedido:
+                    print("1. Inserir produto")
+                    print("0. Voltar")
+                    menu_pedido_produto = int(input("Digite a opção desejada: "))
+                    if menu_pedido_produto == 1:
+                        id_produto_pedido = int(input("Digite o ID do produto deste pedido: "))
+                        lista_produtos.append(id_produto_pedido)
+                    elif menu_pedido_produto == 0:
+                        break
                 id_cliente = int(input("Digite o ID do cliente a ser relacionado com o novo pedido"))
                 repositorio_pedido = pedido_repositorio.PedidoRepositorio()
-                repositorio_pedido.inserir_pedido(id_cliente, sessao)
+                repositorio_pedido.inserir_pedido(id_cliente, sessao, lista_produtos)
                 sessao.commit()
             except:
                 sessao.rollback()

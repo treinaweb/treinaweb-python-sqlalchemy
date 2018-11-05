@@ -138,6 +138,7 @@ while loop:
     elif menu_principal == 3:
         print(30 * "-", "MENU", 30 * "-")
         print("1. Inserir pedido")
+        print("2. Listar pedidos")
         print("0. Sair")
         print(67 * "-")
         menu_pedido = int(input("Digite a opção desejada: "))
@@ -161,6 +162,20 @@ while loop:
                 repositorio_pedido = pedido_repositorio.PedidoRepositorio()
                 repositorio_pedido.inserir_pedido(id_cliente, sessao, lista_produtos)
                 sessao.commit()
+            except:
+                sessao.rollback()
+                raise
+            finally:
+                sessao.close()
+
+        elif menu_pedido == 2:
+            fabrica = fabrica_conexao.FabricaConexao()
+            sessao = fabrica.criar_sessao()
+            try:
+                repositorio_pedido = pedido_repositorio.PedidoRepositorio()
+                pedidos = repositorio_pedido.listar_pedidos(sessao)
+                for i in pedidos:
+                    print(i, i.produtos)
             except:
                 sessao.rollback()
                 raise

@@ -14,3 +14,9 @@ class PedidoRepositorio():
             produto = query_produto.listar_produto_id(i, sessao)
             novo_pedido.produtos.append(produto)
         query_pedido.inserir_pedido(novo_pedido, sessao)
+
+    def listar_pedidos(self, sessao):
+        query_pedido = pedido_query.PedidoQuery()
+        pedidos = query_pedido.listar_pedidos(sessao)
+
+        return pedidos
